@@ -1,5 +1,16 @@
 from selenium import webdriver
+import unittest
 
-brower=webdriver.Chrome('/Users/finup/Desktop/chromedriver')
-brower.get('http://127.0.0.1:8000/')
-assert 'Django' in brower.title
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.brower=webdriver.Chrome('/Users/finup/Desktop/chromedriver')
+        self.brower.implicitly_wait(3)
+    def tearDown(self):
+        self.brower.quit()
+    def test_can_start_a_list_and_retrieve_it_later(self):
+         self.brower.get('http://localhost:8000')
+         self.assertIn('Django',self.brower.title)
+         self.fail('Finsh the test')
+
+if __name__=='__main__':
+    unittest.main(warnings='ignore')
